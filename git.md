@@ -1,106 +1,386 @@
-# 🌿 Beautiful Soup Notes (Beginner Friendly)
+# 📘 Git Notes (Beginner Friendly)
 
-## What is Beautiful Soup?
-
-Beautiful Soup is a Python library used for reading and extracting data from HTML pages. It makes it easy to scrape information from websites.
+Git is a tool that helps you track changes in your code. Think of it like a **time machine** for developers — you can go back, fix mistakes, and collaborate with others easily.
 
 ---
 
-## ⭐ Step 1: Installation
+## ✅ What is Git?
+
+Git is a **version control system**. It:
+
+* Saves different versions of your project
+* Lets you undo mistakes
+* Helps you work with a team
+* Keeps your code safe
+
+---
+
+## ⭐ Install Git
+
+Download from: [https://git-scm.com/](https://git-scm.com/)
+
+Check if installed:
 
 ```bash
-pip install beautifulsoup4
+git --version
 ```
 
 ---
 
-## ⭐ Step 2: Basic Example
+## ⭐ Create a New Git Project
 
-```python
-from bs4 import BeautifulSoup
-
-html_code = """
-<html>
-    <body>
-        <h1>Hello World</h1>
-        <p class="info">This is a paragraph.</p>
-    </body>
-</html>
-"""
-
-soup = BeautifulSoup(html_code, "html.parser")
-
-title_tag = soup.find("h1")
-paragraph_tag = soup.find("p", class_="info")
-
-print(title_tag.text)
-print(paragraph_tag.text)
+```bash
+git init
 ```
 
-### Explanation
-
-* `from bs4 import BeautifulSoup` → Import the library.
-* `html_code` → Sample HTML.
-* `soup` → Parses the HTML.
-* `find("h1")` → Finds the first `<h1>`.
-* `find("p", class_="info")` → Finds a `<p>` with class `info`.
-* `.text` → Extracts only the text.
+**Explanation:**
+`git init` creates a hidden folder (`.git`) that starts tracking your project.
 
 ---
 
-## ⭐ Step 3: Scraping a Real Website
+## ⭐ Add Files to Git
 
-```python
-import requests
-from bs4 import BeautifulSoup
-
-url = "http://quotes.toscrape.com"
-response = requests.get(url)
-
-soup = BeautifulSoup(response.text, "html.parser")
-
-quotes = soup.find_all("span", class_="text")
-
-for q in quotes:
-    print(q.text)
+```bash
+git add filename
 ```
 
-### Explanation
+Add everything:
 
-* `requests.get()` → Downloads the webpage.
-* `find_all()` → Finds all matching tags.
-* Loop prints each quote.
+```bash
+git add .
+```
+
+**Explanation:**
+`git add` tells Git which files you want to save in the next version.
 
 ---
 
-## ⭐ Extracting Links
+## ⭐ Save Changes (Commit)
 
-```python
-for link in soup.find_all("a"):
-    print(link.get("href"))
+```bash
+git commit -m "Your message"
+```
+
+**Explanation:**
+A commit is like taking a **snapshot** of your project.
+
+---
+
+## ⭐ Check Status
+
+```bash
+git status
+```
+
+Shows:
+
+* New files
+* Modified files
+* Tracked/untracked
+
+---
+
+## ⭐ See Commit History
+
+```bash
+git log
+```
+
+Press `q` to exit.
+
+---
+
+## ⭐ Connect Local Code to GitHub
+
+```bash
+git remote add origin https://github.com/username/repo.git
+```
+
+**Explanation:**
+`origin` = nickname for your GitHub repo.
+
+---
+
+## ⭐ Push Code to GitHub
+
+```bash
+git push -u origin main
+```
+
+**Explanation:**
+Uploads your local commits to GitHub.
+
+---
+
+## ⭐ Clone a Project
+
+```bash
+git clone https://github.com/user/repo.git
+```
+
+**Explanation:**
+Downloads a GitHub project to your computer.
+
+---
+
+## ⭐ Create a New Branch
+
+```bash
+git branch dev
+```
+
+Switch to it:
+
+```bash
+git checkout dev
+```
+
+Shortcut:
+
+```bash
+git checkout -b dev
+```
+
+**Explanation:**
+Branches let you add features without touching the main code.
+
+---
+
+## ⭐ Merge Branches
+
+First switch to main branch:
+
+```bash
+git checkout main
+```
+
+Merge:
+
+```bash
+git merge dev
 ```
 
 ---
 
-## ⭐ Extracting Image Sources
+## ⭐ Delete a Branch
 
-```python
-img = soup.find("img")
-print(img.get("src"))
+```bash
+git branch -d dev
 ```
 
 ---
 
-## ⭐ CSS Selectors
+## ⭐ Pull Latest Code
 
-```python
-titles = soup.select("div.quote span.text")
+```bash
+git pull
+```
+
+**Explanation:**
+Downloads changes from GitHub into your local project.
+
+---
+
+## ⭐ Important Git Commands (Quick Summary)
+
+| Command                   | Use                   |
+| ------------------------- | --------------------- |
+| `git init`                | Start Git in a folder |
+| `git add .`               | Add all files         |
+| `git commit -m "msg"`     | Save changes          |
+| `git status`              | Check current state   |
+| `git log`                 | See history           |
+| `git branch`              | Check branches        |
+| `git checkout branchname` | Switch branches       |
+| `git merge branchname`    | Merge branch          |
+| `git push`                | Upload to GitHub      |
+| `git pull`                | Download from GitHub  |
+
+---
+
+## Want Advanced Git Topics?
+
+I can add:
+
+* Git stash
+* Git rebase
+* Solve merge conflicts
+* Forking workflow
+* PR workflow
+* GitHub Actions
+
+Just tell me! 🚀
+
+---
+
+# 🚀 Advanced Git Topics
+
+## ⭐ Git Stash
+
+Temporarily save your uncommitted changes.
+
+```bash
+git stash
+```
+
+Apply them back:
+
+```bash
+git stash apply
+```
+
+List stashes:
+
+```bash
+git stash list
+```
+
+Delete stash:
+
+```bash
+git stash drop
 ```
 
 ---
 
-## Tips
+## ⭐ Git Rebase
 
-* Check if a website allows scraping.
-* Use delays when scraping many pages.
-* Beautiful Soup only reads HTML; it doesn’t load pages on its own.
+Rebase cleans your commit history by placing your commits on top of another branch.
+
+Rebase onto main:
+
+```bash
+git checkout dev
+git rebase main
+```
+
+Continue after fixing conflicts:
+
+```bash
+git rebase --continue
+```
+
+Abort:
+
+```bash
+git rebase --abort
+```
+
+---
+
+## ⭐ Solving Merge Conflicts
+
+When Git can't automatically merge:
+
+1. Open the file
+2. Look for:
+
+```
+<<<<<<<<< HEAD
+Your code
+===========
+Other branch code
+>>>>>>>>>> branchname
+```
+
+3. Edit manually
+4. Save
+5. Commit:
+
+```bash
+git add .
+git commit -m "fixed conflict"
+```
+
+---
+
+## ⭐ Forking Workflow (GitHub)
+
+Used in open-source projects.
+
+1. Fork a repo
+2. Clone your fork
+3. Add original repo as upstream:
+
+```bash
+git remote add upstream https://github.com/original/repo.git
+```
+
+4. Pull updates:
+
+```bash
+git pull upstream main
+```
+
+5. Push to your fork & open a Pull Request
+
+---
+
+## ⭐ Pull Request Workflow
+
+1. Create a new branch
+2. Make changes
+3. Push the branch
+4. Create a Pull Request on GitHub
+5. Review + merge
+
+---
+
+## ⭐ Git Reset (Dangerous but Powerful)
+
+Soft reset (keep files):
+
+```bash
+git reset --soft HEAD~1
+```
+
+Hard reset (deletes changes):
+
+```bash
+git reset --hard HEAD~1
+```
+
+---
+
+## ⭐ Git Revert (Safe Undo)
+
+Undo a commit without changing history:
+
+```bash
+git revert <commit-id>
+```
+
+---
+
+## ⭐ Git Tag (Versioning)
+
+Create tag:
+
+```bash
+git tag v1.0
+```
+
+Push tags:
+
+```bash
+git push --tags
+```
+
+---
+
+## ⭐ Git Cherry-Pick
+
+Move a specific commit to another branch:
+
+```bash
+git cherry-pick <commit-id>
+```
+
+---
+
+If you want, I can also add:
+
+* Real-world workflows (GitFlow)
+* CI/CD with GitHub Actions
+* Interactive rebase tutorials
+* Visual diagrams for each concept 🔥
